@@ -1,0 +1,13 @@
+
+        {% for c in node.children.all()%}
+        <li>
+            <details>
+                <summary hx-get="{{ url_for('data_management.get_node',id=c.id)}}" hx-trigger="click" hx-target="#folderStructure_{{c.id}}" hx-swap="outerHTML">{{c.name}}</summary>
+                <ul id="folderStructure_{{c.id}}">
+
+                </ul>
+            </details>
+        </li>
+      {% endfor %}
+
+
