@@ -1,0 +1,41 @@
+{% extends "base.jinja2" %}
+{% block content %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="bg-gray-200 flex justify-center items-center h-screen">
+        <!-- Login Form -->
+        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+            <h1 class="text-2xl font-semibold mb-4">{{_('Login')}}</h1>
+
+            <!-- Username Input -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-600">{{ form.username.label }}</label>
+                {{ form.username(class_= "mt-1 p-2 w-full border rounded-md") }}
+                {% for error in form.username.errors %}
+                <p class="text-red-500 text-xs mt-1">[{{ error }}]</p>
+                {% endfor %}
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-600">{{ form.password.label }}</label>
+                {{ form.password(class_="mt-1 p-2 w-full border rounded-md") }}
+                {% for error in form.password.errors %}
+                <p class="text-red-500 text-xs mt-1">[{{ error }}]</p>
+                {% endfor %}
+            </div>
+
+            <!-- Remember Me Checkbox -->
+            <div class="mb-4 flex items-center">
+                {{ form.remember_me(class_="mr-2") }}
+                <label class="text-sm text-gray-600">{{ form.remember_me.label }}</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-4">
+                {{ form.submit(class_="bg-blue-500 text-white px-4 py-2 rounded-md w-full") }}
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

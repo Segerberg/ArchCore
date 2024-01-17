@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/minimal.css') }}">
+      {% if title %}
+      <title>ArchCore</title>
+      {% else %}
+      <title>ArchCore</title>
+      {% endif %}
+    </head>
+    <body>
+        {% include '_navbar.jinja2'%}
+        {% block sub_nav %}{% endblock %}
+        <div>
+            <div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+    <script src="{{ url_for('static', filename='js/htmx.min.js') }}"></script>
+{% block content %}{% endblock %}
+    </body>
+</html>

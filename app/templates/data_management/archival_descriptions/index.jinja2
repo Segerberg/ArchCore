@@ -3,6 +3,81 @@
 {% block content %}
 
 {% include "data_management/_submenu.jinja2" %}
-ARCH_DESC
 
+<style>
+  /* Style for the table */
+  table {
+    width: 50%; /* Set table width */
+    border-collapse: collapse; /* Collapse borders */
+    margin: 50px auto; /* Center the table */
+  }
+
+  /* Style for table cells */
+  td, th {
+    border: 1px dashed #000; /* Dashed border */
+    padding: 8px 12px; /* Padding for cell content */
+    text-align: center; /* Center-align cell content */
+  }
+
+  /* Apply dotted border to the first row */
+  tr:first-child td {
+    border-top: 2px dotted #000; /* Dotted top border */
+  }
+
+  /* Apply dotted border to the last row */
+  tr:last-child td {
+    border-bottom: 2px dotted #000; /* Dotted bottom border */
+  }
+
+  /* Apply dotted border to the first column */
+  td:first-child {
+    border-left: 2px dotted #000; /* Dotted left border */
+  }
+
+  /* Apply dotted border to the last column */
+  td:last-child {
+    border-right: 2px dotted #000; /* Dotted right border */
+  }
+
+</style>
+<main class="content">
+  <h1>Resources</h1>
+<table>
+    <thead>
+    <tr>
+        <th>RefCode</th>
+        <th>Title</th>
+        <th>Level of Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if nodes %}
+    {% for node in nodes %}
+    <tr>
+        <td>{{node.ref_code}}</td>
+        <td>{{node.name}}</td>
+        <td>{{node.level_of_description}}</td>
+    </tr>
+    {% endfor %}
+
+    {% else %}
+    <tr>
+        <td colspan="3">No Results</td>
+    </tr>
+    {% endif %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <th colspan="3">
+            {% if prev_url %}
+            <a href="{{ prev_url }}">←&nbsp;Previous</a>{% if next_url %}&nbsp;|{% endif %}
+            {% endif %}
+            {% if next_url %}
+            <a href="{{ next_url }}">Next&nbsp;→</a>
+            {% endif %}
+        </th>
+    </tr>
+    </tfoot>
+</table>
+</main>
 {% endblock %}

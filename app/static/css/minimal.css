@@ -1,0 +1,129 @@
+body {
+font-family: monospace;
+}
+nav {
+    font-size: 15px;
+    overflow: hidden;
+    height: auto;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav details {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+     float: right;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    //border: 1px solid #ddd;
+    //border-radius: 4px;
+    z-index: 1; /* Ensure it stays on top */
+    display: none; /* Initially hidden */
+}
+
+nav details[open] ul {
+    display: block; /* Show when details is open */
+    background-color: white;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.dashed-hr {
+    border: none;
+    border-top: 2px dashed black;
+    }
+
+  .card {
+    width: 300px;
+    height: 200px
+    padding-left: 10px;
+    border: 2px dotted #000; /* Dashed border */
+    margin: 1px auto 1px;
+  }
+
+  .card-header {
+     display: flex; /* Enables flexbox */
+    justify-content: center;
+    border-bottom: 1px dashed  /* Border at the bottom of the header */
+
+}
+  .card-content {
+    padding: 10px;
+
+}
+  .progress-container {
+    width: 100%; /* Full width */
+    background-color: #f1f1f1; /* Light gray background */
+  }
+
+  /* Style for the progress bar */
+  .progress-bar {
+    width: 0%; /* Initially no width */
+    height: 10px; /* Height of the progress bar */
+    background-color: Black; /* Green color for progress */
+    text-align: center; /* Center the text inside the progress bar */
+    color: white; /* Text color */
+    line-height: 30px; /* Vertical centering */
+  }
+
+ .flex-container {
+  margin-top: 50px;
+    display: flex;           /* Use flexbox */
+    flex-wrap: wrap;         /* Allow items to wrap onto multiple lines */
+    justify-content: flex-start; /* Center the items horizontally */
+  }
+
+ .flex-item {
+    width: 200px;            /* Set a fixed width for each item */
+    height: 150px;           /* Set a fixed height for each item */
+    margin: 10px;            /* Add some spacing around each item */
+    display: flex;           /* Enable flexbox */
+    align-items: flex-start; /* Align items at the top */
+    justify-content: center; /* Center content horizontally */
+}
+
+  /* Style for the spinner */
+  .spinner {
+    font-size: 15px; /* Adjust font size as needed */
+    display: inline-block; /* Make it inline-block to center it easily */
+    animation: spin 1s infinite linear; /* Animation */
+  }
+
+  /* Animation keyframes for the spinner */
+  @keyframes spin {
+    0% { transform: rotate(0deg); } /* Start at 0 degrees */
+    100% { transform: rotate(360deg); } /* End at 360 degrees */
+  }
+
+    /* Container for the columns */
+  .arch-container {
+    display: flex; /* Use flexbox */
+    height: 100vh; /* Full height of the viewport */
+  }
+
+  /* Left column (1/4 width) */
+  .left-column {
+    flex: 1; /* Take up 1/4 of the available space */
+    background-color: #f2f2f2; /* Background color */
+    padding: 20px; /* Padding */
+  }
+
+  /* Right column (3/4 width) */
+  .right-column {
+    flex: 3; /* Take up 3/4 of the available space */
+    background-color: #e0e0e0; /* Background color */
+    padding: 20px; /* Padding */
+  }

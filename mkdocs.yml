@@ -1,0 +1,5 @@
+site_name: ArchCore
+nav:
+  - Home: index.md
+  - Installation: installation/index.md
+  - Development: development/index.md

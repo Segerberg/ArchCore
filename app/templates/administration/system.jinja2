@@ -1,0 +1,51 @@
+{% extends "base.jinja2" %}
+{% block content %}
+{% include "administration/_submenu.jinja2" %}
+<main class="content">
+  <!-- Your main content here -->
+  <h1>System Information</h1>
+
+
+    <div class="flex-container">
+        <div class="flex-item">
+            <div class="card">
+                <div class="card-header"><h3>{{_('Machine')}}</h3></div>
+                <div class="card-content">
+                <p>OS: {{os_version}}</p>
+                <p>Python: {{python_version}}</p>
+                <p>SQLITE: {{sqlite_info}}</p>
+                <hr>
+                <p>Available RAM: {{ram_total}}</p>
+                <p>CPU-Cores: {{cpu_info.cpu_cores}}</p>
+                <p>CPU-Type: {{cpu_info.system_architecture}}</p>
+                <p>CPU-Name: {{cpu_info.processor_name}}</p></div>
+            </div>
+        </div>
+        <div class="flex-item">
+            <div class="card">
+                <div class="card-header"><h3>{{_('Usage')}} </h3></div>
+                <div class="card-content" hx-get="{{ url_for('main.poll_usage')}}" hx-trigger="every 4s">
+                     <h3>{{_('CPU')}}&nbsp;<span class="spinner">*</span></h3>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                         <h3>{{_('RAM')}}&nbsp;<span class="spinner">*</span></h3>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="flex-item">
+            <div class="card">
+                <div class="card-header"><h3>{{_('Python packages')}}</h3></div>
+                <div class="card-content">
+                         {% for package, version in python_packages %}
+            <p>{{package}}: {{version}}</p>
+            {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

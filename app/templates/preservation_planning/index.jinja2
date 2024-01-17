@@ -1,0 +1,18 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+{% include "preservation_planning/_submenu.jinja2" %}
+<div class="p-6">
+    <h1 class="text-2xl mb-4">Preservation Planning </h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white p-4 shadow-md rounded-lg">
+            <h2 class="text-xl font-semibold mb-2">Formats (PUID)</h2>
+            <p class="text-xl" >100.000.000</p>
+        </div>
+        <div class="bg-white p-4 shadow-md rounded-lg">
+            <h2 class="text-xl font-semibold mb-2">Formats (MIME)</h2>
+            <p>50 GB</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
