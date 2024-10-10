@@ -3,3 +3,4 @@ nav:
   - Home: index.md
   - Installation: installation/index.md
   - Development: development/index.md
+  - User Guide: user_guide/index.md
