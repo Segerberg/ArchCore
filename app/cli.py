@@ -1,6 +1,7 @@
 import os
 from flask import Blueprint
 import click
+from app.preservation.tools.indentifiers.fileformat import FormatIdentifier
 
 bp = Blueprint('cli', __name__, cli_group=None)
 
@@ -8,6 +9,41 @@ bp = Blueprint('cli', __name__, cli_group=None)
 def translate():
     """Translation and localization commands."""
     pass
+
+
+# Preservation CLI group
+@bp.cli.group()
+def preservation():
+    """Digital preservation commands."""
+    pass
+
+# Add the identify-format command under the preservation group
+@preservation.command()
+@click.argument('filename')
+@click.option('--use-pronom', default=True, help='Use PRONOM formats for identification')
+@click.option('--use-extension', default=True, help='Use extension-based formats for identification')
+def identify_format(filename, use_pronom, use_extension):
+    """Identify the format of a given file using FIDO"""
+    if not os.path.exists(filename):
+        raise click.BadParameter(f"File {filename} does not exist.")
+
+    identifier = FormatIdentifier(
+        use_fido_pronom_formats=use_pronom,
+        use_fido_extension_formats=use_extension
+    )
+
+    try:
+        format_name, format_version, format_registry_key = identifier.identify_file_format(filename)
+
+        if format_name:
+            click.echo(f"Format Name: {format_name}")
+            click.echo(f"Format Version: {format_version if format_version else 'N/A'}")
+            click.echo(f"Format Registry Key (PUID): {format_registry_key if format_registry_key else 'N/A'}")
+        else:
+            click.echo("Unknown file format.")
+    except Exception as e:
+        raise click.ClickException(f"Error identifying file format: {str(e)}")
+
 
 
 @translate.command()
