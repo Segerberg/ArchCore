@@ -1,47 +1,9 @@
 {% extends "base.jinja2" %}
-
 {% block content %}
-
 {% include "data_management/_submenu.jinja2" %}
-
-<style>
-  /* Style for the table */
-  table {
-    width: 50%; /* Set table width */
-    border-collapse: collapse; /* Collapse borders */
-    margin: 50px auto; /* Center the table */
-  }
-
-  /* Style for table cells */
-  td, th {
-    border: 1px dashed #000; /* Dashed border */
-    padding: 8px 12px; /* Padding for cell content */
-    text-align: center; /* Center-align cell content */
-  }
-
-  /* Apply dotted border to the first row */
-  tr:first-child td {
-    border-top: 2px dotted #000; /* Dotted top border */
-  }
-
-  /* Apply dotted border to the last row */
-  tr:last-child td {
-    border-bottom: 2px dotted #000; /* Dotted bottom border */
-  }
-
-  /* Apply dotted border to the first column */
-  td:first-child {
-    border-left: 2px dotted #000; /* Dotted left border */
-  }
-
-  /* Apply dotted border to the last column */
-  td:last-child {
-    border-right: 2px dotted #000; /* Dotted right border */
-  }
-
-</style>
-<main class="content">
+<main id="content" class="content">
   <h1>Resources</h1>
+    <button hx-get="{{url_for('data_management.add_node')}}" hx-target="#content">Add +</button>
 <table>
     <thead>
     <tr>
@@ -54,14 +16,13 @@
     {% if nodes %}
     {% for node in nodes %}
     <tr>
-        <td>{{node.ref_code}}</td>
-        <td>{{node.name}}</td>
+        <td><a href="{{ url_for('data_management.archival_descriptions_detail',id=node.id)}}">{{node.ref_code}}</a></td>
+        <td>{{node.title}}</td>
         <td>{{node.level_of_description}}</td>
     </tr>
     {% endfor %}
 
-    {% else %}
-    <tr>
+    {% else %}d
         <td colspan="3">No Results</td>
     </tr>
     {% endif %}

@@ -10,7 +10,8 @@
     <a href="{{ url_for('preservation_planning.index') }}">{{_('Preservation&nbsp;planning')}}</a>&nbsp;|
     <a href="{{ url_for('data_management.index') }}">{{_('Data&nbsp;Management')}}</a>&nbsp;|
     <a href="{{ url_for('main.administration') }}">{{_('Administration')}}</a>&nbsp;|
-    </strong>
+        <a href="#" onclick="toggleMode()">Toggle Mode</a>
+
         <details>
         <summary>{{current_user.username}}</summary>
         <ul>
