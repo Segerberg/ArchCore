@@ -1,6 +1,24 @@
 body {
 font-family: monospace;
+    transition: background-color 0.0s ease;
+     display: flex;
+      flex-direction: column;
 }
+
+body.dark-mode {
+      background-color: #243763;
+      color: #fff;
+    }
+body.dark-mode a {
+   color: #fff;
+}
+    .mode-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
 nav {
     font-size: 15px;
     overflow: hidden;
@@ -36,21 +54,19 @@ nav ul {
 
 nav details[open] ul {
     display: block; /* Show when details is open */
-    background-color: white;
     font-size: 12px;
     padding: 10px;
 }
 
 .dashed-hr {
     border: none;
-    border-top: 2px dashed black;
+    border-top: 2px dashed;
     }
 
   .card {
     width: 300px;
-    height: 200px
     padding-left: 10px;
-    border: 2px dotted #000; /* Dashed border */
+    border: 2px dotted; /* Dashed border */
     margin: 1px auto 1px;
   }
 
@@ -66,18 +82,30 @@ nav details[open] ul {
 }
   .progress-container {
     width: 100%; /* Full width */
-    background-color: #f1f1f1; /* Light gray background */
+   // background-color: #f1f1f1; /* Light gray background */
   }
 
+
   /* Style for the progress bar */
-  .progress-bar {
+  body .progress-bar {
     width: 0%; /* Initially no width */
     height: 10px; /* Height of the progress bar */
-    background-color: Black; /* Green color for progress */
+    background-color: Black;
     text-align: center; /* Center the text inside the progress bar */
     color: white; /* Text color */
     line-height: 30px; /* Vertical centering */
   }
+
+
+  body.dark-mode .progress-bar {
+    width: 0%; /* Initially no width */
+    height: 10px; /* Height of the progress bar */
+    background-color: orange;
+    text-align: center; /* Center the text inside the progress bar */
+    color: white; /* Text color */
+    line-height: 30px; /* Vertical centering */
+  }
+
 
  .flex-container {
   margin-top: 50px;
@@ -107,23 +135,113 @@ nav details[open] ul {
     0% { transform: rotate(0deg); } /* Start at 0 degrees */
     100% { transform: rotate(360deg); } /* End at 360 degrees */
   }
-
     /* Container for the columns */
   .arch-container {
     display: flex; /* Use flexbox */
-    height: 100vh; /* Full height of the viewport */
+    //height: 100vh; /* Full height of the viewport */
   }
 
-  /* Left column (1/4 width) */
-  .left-column {
-    flex: 1; /* Take up 1/4 of the available space */
-    background-color: #f2f2f2; /* Background color */
+  .tree-column {
+    flex: 2; /* Take up 1/4 of the available space */
+    //background-color: #f2f2f2; /* Background color */
     padding: 20px; /* Padding */
+    border-right: 1px dashed;
+      border-bottom: 1px dashed;
+  }
+    .node-column {
+    flex: 5; /* Take up 1/4 of the available space */
+    //background-color: #f2f2f2; /* Background color */
+    padding: 20px; /* Padding */
+        border-right: 1px dashed;
+        border-bottom: 1px dashed;
+
+  }    .action-column {
+    flex: 2; /* Take up 1/4 of the available space */
+    //background-color: #f2f2f2; /* Background color */
+    padding: 20px; /* Padding */
+        border-bottom: 1px dashed;
   }
 
-  /* Right column (3/4 width) */
-  .right-column {
-    flex: 3; /* Take up 3/4 of the available space */
-    background-color: #e0e0e0; /* Background color */
-    padding: 20px; /* Padding */
+
+  footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      bottom: 0;
+    }
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #F8F5F1; /* Badge background color */
+  //color: #fff; /* Text color */
+  border-radius: 6px; /* Rounded corners */
+  margin: 0; /* Remove default margin */
+}
+
+kbd {
+  border-radius: 2px;
+  padding: 2px;
+  border: 1px solid black;
+}
+
+table {
+    width: 50%; /* Set table width */
+    border-collapse: collapse; /* Collapse borders */
+    margin: 50px auto; /* Center the table */
   }
+
+  /* Style for table cells */
+  td, th {
+    border: 1px dashed #000; /* Dashed border */
+    padding: 8px 12px; /* Padding for cell content */
+    text-align: center; /* Center-align cell content */
+  }
+
+  /* Apply dotted border to the first row */
+  tr:first-child td {
+    border-top: 2px dotted #000; /* Dotted top border */
+  }
+
+  /* Apply dotted border to the last row */
+  tr:last-child td {
+    border-bottom: 2px dotted #000; /* Dotted bottom border */
+  }
+
+  /* Apply dotted border to the first column */
+  td:first-child {
+    border-left: 2px dotted #000; /* Dotted left border */
+  }
+
+  /* Apply dotted border to the last column */
+  td:last-child {
+    border-right: 2px dotted #000; /* Dotted right border */
+  }
+
+  body.dark-mode table,
+body.dark-mode table th,
+body.dark-mode table td {
+  border-color: #fff;
+}
+
+body.dark-mode td, body.dark-mode th {
+  border: 1px dashed #fff;
+}
+
+body.dark-mode tr:first-child td {
+  border-top: 2px dotted #fff;
+}
+
+body.dark-mode tr:last-child td {
+  border-bottom: 2px dotted #fff;
+}
+
+body.dark-mode td:first-child {
+  border-left: 2px dotted #fff; 
+}
+
+body.dark-mode td:last-child {
+  border-right: 2px dotted #fff; 
+}
