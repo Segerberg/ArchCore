@@ -1,0 +1,21 @@
+{% block content %}
+    <main class="content">
+        <div hx-target="this" hx-swap="outerHTML">
+            <div class="flex-container">
+                <div class="tree-column">
+                    {% if parent_node %}
+                        {% include "data_management/archival_descriptions/tree.jinja2" %}
+                    {% endif %}
+                </div>
+                <div class="node-column">
+                    {% include "data_management/archival_descriptions/add_node_detail.jinja2" %}
+                </div>
+                <div class="action-column">
+                    {% if parent_node %}
+                        {% include "data_management/archival_descriptions/node_action.jinja2" %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

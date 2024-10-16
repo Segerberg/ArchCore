@@ -22,22 +22,30 @@
   left         : -2px;
   width        : calc(var(--spacing) + 2px);
   height       : calc(var(--spacing) + 1px);
-  border       : solid #ddd;
+  border       : dotted #ddd;
   border-width : 0 0 2px 2px;
+}
+
+.tree a {
+    text-decoration: none;
+    color: inherit;
+}
+.tree a:hover {
+    text-decoration: underline;
 }
 </style>
 {% set top_node = node.get_top_node() %}
 {% set parent_nodes = node.get_all_parent_nodes() %}
 <div class="tree">
     {% for p in  parent_nodes %}
-    <a href="{{ url_for('data_management.archival_descriptions_detail',id=p.id)}}">{{p.name}}</a>/{% endfor %}
+    <a href="{{ url_for('data_management.archival_descriptions_detail',id=p.id)}}">{{p.title}}</a>/{% endfor %}
     {% if node.parent %}
         <ul>
         {% for n in node.get_sibling_nodes() %}
         <li>
             {% if n.id == node.id %}
             <details>
-                <summary class="cursor-pointer hover:cursor-pointer" hx-get="{{ url_for('data_management.get_node',id=n.id)}}" hx-trigger="load" hx-target="#folderStructure_{{n.id}}">{{n.name}}</summary>
+                <summary class="cursor-pointer hover:cursor-pointer" hx-get="{{ url_for('data_management.get_node',id=n.id)}}" hx-trigger="load" hx-target="#folderStructure_{{n.id}}"><span hx-trigger="click" hx-target="#node-detail" hx-post="{{ url_for('data_management.archival_descriptions_detail',id=n.id)}}">{{n.title}}</span></summary>
                 <ul id="folderStructure_{{n.id}}">
                 <!-- Content will be loaded here -->
                 </ul>
@@ -51,7 +59,7 @@
 <ul>
     <li>
         <details open>
-            <summary class="cursor-pointer hover:cursor-pointer" hx-get="{{ url_for('data_management.get_node',id=node.id, full_tree='true')}}" hx-trigger="load" hx-target="#folderStructure_{{node.id}}" hx-swap="outerHTML">{{node.name}}</summary>
+            <summary class="cursor-pointer hover:cursor-pointer" hx-get="{{ url_for('data_management.get_node',id=node.id, full_tree='true')}}" hx-trigger="load" hx-target="#folderStructure_{{node.id}}" hx-swap="outerHTML"><span hx-trigger="click" hx-target="#node-detail" hx-post="{{ url_for('data_management.archival_descriptions_detail',id=node.id)}}">{{node.title}}</span></summary>
             <ul id="folderStructure_{{node.id}}">
                 <!-- Content will be loaded here -->
             </ul>

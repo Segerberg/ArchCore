@@ -6,81 +6,43 @@
     align-items: center;
     cursor: pointer;
   }
-
 </style>
 
+<div id="node-detail">
+<h1>{{ node.title }}</h1>
+<button hx-get="{{url_for('data_management.edit_node', id=node.id)}}">Edit node ✎</button>
+<button hx-get="{{url_for('data_management.add_node', parent_id=node.id)}}">Add child +</button>
+<button hx-post="{{url_for('data_management.delete_node', id=node.id)}}">Delete ␡</button>
 <details open>
     <summary>
         <h2>IDENTITY STATEMENT AREA</h2>
     </summary>
-    <p>Content goes here... Content goes here.. Content goes here.. Content goes here.. Content
-        goes here..</p>
+    <p>Reference code: {{ node.ref_code }}</p>
+    <p>Title: {{ node.title }}</p>
+    <p>Level of description: {{ node.level_of_description }}</p>
+    <p>Start Date:{% if node.date_start %} {{ node.date_start.strftime("%Y-%m-%d") }} {% endif %}</p>
+    <p>End Date:{% if node.date_end %} {{ node.date_end.strftime("%Y-%m-%d") }} {% endif %}</p>
+    <p>Extent and medium: {{ node.extent }}</p>
 </details>
 
-
-<details>
+<details open>
     <summary>
         <h2>CONTEXT AREA</h2>
     </summary>
-    <p>Content goes here...</p>
+        <p>Name of creator(s):X</p>
+        <p>Archival history:<br>{{ node.archival_history }}</p>
 </details>
-
 <details>
     <summary>
-        <h2>CONTENT AND STRUCTURE AREA </h2>
-    </summary>
-    <div>
-        <p>Content goes here...</p>
-</details>
-
-<details>
-    <summary>
-        <h2>CONDITIONS OF ACCESS AND USE AREA</h2>
+        <h2>NOTES</h2>
     </summary>
     <p>Content goes here...</p>
 </details>
-
-<details>
-    <summary>
-        <h2>ALLIED MATERIALS AREA</h2>
-    </summary>
-    <p>Content goes here...</p>
-</details>
-
-
-<details>
-    <summary>
-        <h2>NOTES AREA</h2>
-    </summary>
-
-    <p>Content goes here...</p>
-
-</details>
-
 
 <details>
     <summary>
         <h2>ACCESS POINTS</h2>
     </summary>
-
-    <p>Content goes here...</p>
-
-</details>
-
-
-<details>
-    <summary>
-        <h2>DESCRIPTION CONTROL AREA</h2>
-    </summary>
     <p>Content goes here...</p>
 </details>
-
-
-<details>
-    <summary>
-        <h2>ADMINISTRATION AREA</h2>
-    </summary>
-
-    <p>Content goes here...</p>
-
-</details>
+</div>
