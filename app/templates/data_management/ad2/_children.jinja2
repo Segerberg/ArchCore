@@ -1,0 +1,15 @@
+<ul>
+    {% for child in children %}
+    <li>
+        <details>
+            <!-- Child node detail fetching -->
+            <summary hx-get="/node/{{ child.id }}/details" hx-target="#details">{{ child.title }}</summary>
+            <!-- Load further children dynamically when expanded -->
+            <ul hx-get="/node/{{ child.id }}/children" hx-trigger="revealed" hx-target="this" hx-swap="outerHTML">
+                <!-- Deeper children will be loaded here -->
+            </ul>
+        </details>
+    </li>
+    {% endfor %}
+</ul>
+
