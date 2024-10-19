@@ -1,6 +1,6 @@
 <div id="node-detail-view">
-<form hx-post="/node/{{ parent_node.id }}/add_child" hx-target="#node-detail-view" hx-swap="outerHTML">
-    <h2>Add Child Node</h2>
+<form hx-post="/node/add_root">
+    <h2>Add Root Node</h2>
 
     <label for="title">Title:</label>
     <input type="text" name="title" id="title" required><br>
@@ -22,6 +22,6 @@
     </select><br>
 
     <button type="submit">Save</button>
-    <button type="button" hx-get="/node/{{ parent_node.id }}/details" hx-target="node-detail-view" hx-swap="outerHTML">Cancel</button>
+
 </form>
 </div>

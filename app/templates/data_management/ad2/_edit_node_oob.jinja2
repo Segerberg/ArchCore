@@ -1,0 +1,9 @@
+<div id="node-detail-view" hx-swap-oob="true">
+    {{ render_template('data_management/ad2/_node_details.jinja2', node=node) }}
+</div>
+
+<!-- Update the tree node title -->
+<summary id="tree-node-title-{{ node.id }}" hx-swap-oob="true">
+    {{ node.title }}
+</summary>
+

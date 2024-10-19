@@ -2,6 +2,7 @@
 {% block content %}
 
 {% include "data_management/_submenu.jinja2" %}
+
     <div class="flex-container">
         <!-- Left column: Tree structure -->
         <div class="tree-column">
@@ -9,12 +10,12 @@
             <ul>
                 <li>
                     <details open>
-                        <summary hx-get="/node/{{ node.id }}/details" hx-target="#details">{{ node.title }}</summary>
+                        <summary id="tree-node-title-{{ node.id }}" hx-get="/node/{{ node.id }}/details" hx-target="#node-detail-view">{{ node.title }}</summary>
                         <ul>
                             {% for child in node.children %}
                             <li>
                                 <details>
-                                    <summary hx-get="/node/{{ child.id }}/details" hx-target="#details">{{ child.title }}</summary>
+                                    <summary id="tree-node-title-{{ child.id }}" hx-get="/node/{{ child.id }}/details" hx-target="#node-detail-view">{{ child.title }}</summary>
                                     <ul hx-get="/node/{{ child.id }}/children" hx-trigger="revealed" hx-target="this" hx-swap="outerHTML">
                                     </ul>
                                 </details>
@@ -28,7 +29,7 @@
 
         <!-- Center column: Node details -->
         <div class="node-column">
-            <div id="details">
+            <div id="node-detail-view">
                 <p>Select a node to view details.</p>
             </div>
         </div>
@@ -36,7 +37,6 @@
         <!-- Right column: Action buttons -->
         <div class="action-column">
             <h2>Actions</h2>
-            <button hx-get="/node/{{ node.id }}/export" hx-target="#details">Export Node</button>
 
 
         </div>

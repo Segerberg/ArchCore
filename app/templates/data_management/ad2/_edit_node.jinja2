@@ -1,7 +1,11 @@
 <div id="node-detail-view">
+    <form hx-post="/node/{{ node.id }}/edit" hx-target="#node-detail-view" hx-swap="outerHTML" method="POST">
 
-    <form hx-post="/node/{{ node.id }}/edit" hx-trigger="submit" hx-target="#node-detail-view" method="POST">
-    <label>Title:</label>
+    <details open>
+        <summary class="summary-header">
+            <h2>IDENTITY STATEMENT AREA</h2>
+        </summary>
+        <label>Title:</label>
     <input type="text" name="title" value="{{ node.title }}" required><br>
 
     <label>Date Start:</label>
@@ -19,9 +23,15 @@
         <option value="{{ lod }}" {% if node.level_of_description == lod %}selected{% endif %}>{{ lod }}</option>
         {% endfor %}
     </select><br>
+    </details>
+
+
     <!-- Submit button for saving -->
     <button type="submit">Save 💾</button>
     <!-- Cancel button to return to view mode -->
     <button type="button" hx-get="/node/{{ node.id }}/details" hx-target="#node-detail-view" hx-swap="outerHTML">Cancel ✖</button>
+
 </form>
+
+
 </div>
