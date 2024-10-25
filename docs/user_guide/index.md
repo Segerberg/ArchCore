@@ -16,3 +16,27 @@ FIDO provides detailed output about identified formats, including:
 * Version Information
 * MIME Type
 * Match Type (signature, extension, container)
+
+# Validators
+
+## Filename
+The validate_filename function checks if a given filename is valid according to a specified regular expression (regex) 
+pattern. By default, it ensures that the filename consists of alphanumeric characters, underscores (_), hyphens (-), 
+and can include valid extensions. The function also prevents multiple consecutive extensions from being the same.
+
+### Parameters
+* filename (str): The filename to validate. 
+* pattern (str, optional): The regular expression pattern used for validation. The default pattern ensures that the filename:
+	•Contains alphanumeric characters (a-z, A-Z, 0-9), underscores (_), or hyphens (-).
+	•Includes one or more valid extensions (e.g., .txt, .pdf, .jpg).
+	•Disallows consecutive identical extensions (e.g., .tar.tar is invalid).
+
+# XML
+The validate_xml function checks whether an XML file conforms to the structure and rules defined by a 
+provided XML Schema Definition (XSD) file. It parses both the XML and XSD files, and returns the validation 
+status along with any error messages.
+
+### Parameters
+
+* xml_file (str): Path to the XML file to be validated.
+* xsd_file (str): Path to the XSD file used for validation.

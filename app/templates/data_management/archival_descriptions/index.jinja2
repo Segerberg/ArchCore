@@ -3,22 +3,23 @@
 {% include "data_management/_submenu.jinja2" %}
 <main id="content" class="content">
   <h1>Resources</h1>
-    <button hx-get="{{url_for('data_management.add_node')}}" hx-target="#content">Add +</button>
+
+     <button hx-get="/node/add_root" hx-target="#content" hx-swap="outerHTML">Add +</button>
 <table>
     <thead>
     <tr>
-        <th>RefCode</th>
         <th>Title</th>
         <th>Level of Description</th>
+        <th>Dates</th>
     </tr>
     </thead>
     <tbody>
     {% if nodes %}
     {% for node in nodes %}
     <tr>
-        <td><a href="{{ url_for('data_management.archival_descriptions_detail',id=node.id)}}">{{node.ref_code}}</a></td>
-        <td>{{node.title}}</td>
+        <td><a href="{{ url_for('data_management.archival_descriptions_detail',id=node.id)}}">{{node.title}}</a></td>
         <td>{{node.level_of_description}}</td>
+        <td>{% if node.date_start %}{{node.date_start | year }} - {% endif %}{% if node.date_end %} {{node.date_end | year}} {% endif %}</td>
     </tr>
     {% endfor %}
 

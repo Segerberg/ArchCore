@@ -20,8 +20,6 @@ class User(UserMixin, db.Model):
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
 
-    posts: so.WriteOnlyMapped['Post'] = so.relationship('Post', back_populates='author')
-
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -30,20 +28,6 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
-
-class Post(db.Model):
-    __tablename__ = 'posts'
-
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    body: so.Mapped[str] = so.mapped_column(sa.String(140))
-    timestamp: so.Mapped[datetime] = so.mapped_column(index=True, default=lambda: datetime.now(timezone.utc))
-    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('users.id'), index=True)
-
-    author: so.Mapped[User] = so.relationship('User', back_populates='posts')
-
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)
-
 
 # Association table for many-to-many relationship between nodes
 node_association = sa.Table(
@@ -175,3 +159,21 @@ class Node(db.Model):
 
     def __repr__(self):
         return '<Node {}>'.format(self.title)
+
+class FormatRegistry(db.Model):
+    __tablename__ = 'format_registry'
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    puid: so.Mapped[str] = so.mapped_column(sa.String(16), unique=True, name="puid")
+    format_name: so.Mapped[str] = so.mapped_column(sa.String(256))
+    format_version: so.Mapped[str] = so.mapped_column(sa.String(64))
+    pronom_xml: so.Mapped[str] = so.mapped_column(sa.String(256))
+    preservation: so.Mapped[bool] = so.mapped_column()
+    allowed: so.Mapped[bool] = so.mapped_column()
+    group: so.Mapped[str] = so.mapped_column(sa.String(256), default='undefined')
+    action: so.Mapped[str] = so.mapped_column(sa.String(256), nullable=True)
+
+    def __repr__(self):
+        return '<Node {}>'.format(self.name)
+
+
+
