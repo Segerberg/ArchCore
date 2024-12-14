@@ -1,7 +1,5 @@
-<nav class="bg-gray-600 p-2">
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="hidden md:flex space-x-8">
-            <a href="{{ url_for('preservation_planning.format_registry') }}" class="text-white hover:text-gray-200">{{_('Format registry')}}</a>
-        </div>
-    </div>
+<nav>
+    <a href="{{ url_for('preservation_planning.format_registry') }}" class="text-white hover:text-gray-200">{{_('Format registry')}}</a>&nbsp;|
+     <a href="{{ url_for('preservation_planning.format_registry') }}" class="text-white hover:text-gray-200">{{_('Preservation actions')}}</a>&nbsp;|
 </nav>
+<hr class="dashed-hr">

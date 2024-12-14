@@ -1,0 +1,13 @@
+{% if submenu %}
+{% extends "base.jinja2" %}
+{% block content %}
+
+{% include "data_management/_submenu.jinja2" %}
+
+<div id="agent-detail-view">
+    {% include "data_management/agent_records/_detail_view.jinja2" %}
+</div>
+{% endblock %}
+{% else %}
+{% include "data_management/agent_records/_detail_view.jinja2" %}
+{% endif %}

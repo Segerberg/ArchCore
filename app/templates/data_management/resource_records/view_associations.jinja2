@@ -1,0 +1,37 @@
+{% extends "base.jinja2" %}
+{% block content %}
+{% include "data_management/_submenu.jinja2" %}
+
+<h1>Manage Associations for {{ node.title }}</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Association Type</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for agent, association_type in associated_agents %}
+        <tr>
+            <td>{{ agent.name }}</td>
+            <td>{{ association_type or "N/A" }}</td>
+            <td>
+                <form method="post" style="display:inline;">
+                    <input type="hidden" name="agent_id" value="{{ agent.id }}">
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if not associated_agents %}
+<p>No associations found for this node.</p>
+{% endif %}
+
+<a href="{{ url_for('data_management.add_agent_relation', id=node.id) }}" class="btn btn-primary">Add Associations</a>
+
+{% endblock %}

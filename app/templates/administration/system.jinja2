@@ -38,6 +38,19 @@
         </div>
                 <div class="flex-item">
             <div class="card">
+                <div class="card-header"><h3>{{_('Workers')}}</h3></div>
+                <div class="card-content">
+            <p>{% if workers %}
+                {% for worker, queues in workers.items() %}
+                👷&nbsp;{{worker}}<br>⮂{% for queue in queues %}&nbsp;{{queue}}<br>{% endfor %}
+                <hr class="dashed-hr">
+                {% endfor %}
+                {% else %}⚠ No workers running{% endif %}</p>
+                </div>
+            </div>
+        </div>
+                        <div class="flex-item">
+            <div class="card">
                 <div class="card-header"><h3>{{_('Python packages')}}</h3></div>
                 <div class="card-content">
                          {% for package, version in python_packages %}

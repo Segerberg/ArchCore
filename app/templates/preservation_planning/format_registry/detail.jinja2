@@ -1,0 +1,18 @@
+{% extends "base.jinja2" %}
+{% block content %}
+{% include "preservation_planning/_submenu.jinja2" %}
+
+<h1>{{format.puid}}&nbsp;|&nbsp;{{format.format_name}}&nbsp;|&nbsp;{{format.format_version}}</h1>
+<hr>
+
+<ul style="list-style: none;">
+    <li><strong>PUID:&nbsp;</strong>{{format.puid}}</li>
+    <li><strong>Format&nbsp;Name:&nbsp;</strong>{{format.format_name}}</li>
+    <li><strong>Preservation&nbsp;Format:&nbsp;</strong>{% if format.preservation %}✔{% else %}𐄂{% endif %}</li>
+    <li><strong>Allowed&nbsp;Format:&nbsp;</strong>{% if format.allowed %}✔{% else %}𐄂{% endif %}</li>
+</ul>
+<hr>
+
+{{format.pronom_xml|xslt(xslt_file)}}
+<hr>
+{% endblock %}

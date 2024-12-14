@@ -1,0 +1,24 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+<h1>Search Results</h1>
+
+<form method="get">
+    <input type="text" name="q" value="{{ search_query or '' }}" placeholder="Enter search query">
+    <button type="submit">Search</button>
+</form>
+
+{% if nodes %}
+<h2>Total hits: {{total_hits}}</h2>
+    <ul>
+        {% for node in nodes %}
+            <li>
+                <h3><a href="{{ url_for('data_management.resource_detail', id=node.id) }}">{{ node.title|safe }}</a>({{node.level_of_description}}) in ({{node.root_title}})</h3>
+                <p>{{ node.archival_history|safe }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+{% endblock %}

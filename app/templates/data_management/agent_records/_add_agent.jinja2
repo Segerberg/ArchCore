@@ -1,0 +1,23 @@
+<form hx-post="/agent_records/add">
+    <h2>Add Agent Record</h2>
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required><br>
+
+    <label for="date_start">Date Start:</label>
+    <input type="date" name="date_start" id="date_start"><br>
+
+    <label for="date_end">Date End:</label>
+    <input type="date" name="date_end" id="date_end"><br>
+
+    <label for="type">Agent Type:</label>
+    <select name="type" id="type">
+        {% for type in agent_type_list %}
+            <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+    </select><br>
+    <label for="description">Description:</label>
+    <textarea name="description" id="description"></textarea><br>
+
+    <button type="submit">Save&nbsp;💾</button>
+</form>

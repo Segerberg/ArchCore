@@ -1,0 +1,58 @@
+{% extends "base.jinja2" %}
+{% block content %}
+<h2>Move Node: {{ source_node.title }}</h2>
+<p>Source Node: <strong>{{ source_node.title }}</strong></p>
+
+<form method="get">
+    <input type="hidden" name="tree_root_id" value="{{ tree_root.id }}">
+    <label for="search">Search Destination:</label>
+    <input type="text" id="search" name="q" value="{{ search_query or '' }}" placeholder="Search nodes...">
+    <button type="submit">Search</button>
+</form>
+
+{% if search_query %}
+    <h3>Search Results for "{{ search_query }}"</h3>
+{% else %}
+    <h3>All Nodes in Tree: {{ tree_root.title }}</h3>
+{% endif %}
+
+<ul>
+    {% for node in top_level_nodes %}
+        <li>
+            <strong>{{ node.title }}</strong>
+            <form method="post" style="display: inline;">
+                <input type="hidden" name="destination_node_id" value="{{ node.id }}">
+                <button type="submit"
+                    {% if node == source_node or source_node.is_descendant_of(node) %}disabled{% endif %}>
+                    Move Here
+                </button>
+            </form>
+
+            {% if node.children|list|length > 0 %}
+    <ul>
+        {% for child in node.children %}
+            {% if child in result_nodes %}
+            <li>
+                {{ child.title }}
+                <form method="post" style="display: inline;">
+                    <input type="hidden" name="destination_node_id" value="{{ child.id }}">
+                    <button type="submit"
+                        {% if child == source_node or source_node.is_descendant_of(child) %}disabled{% endif %}>
+                        Move Here
+                    </button>
+                </form>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+{% if not result_nodes %}
+    <p>No nodes found.</p>
+{% endif %}
+
+<a href="{{ url_for('data_management.resource_detail', id=source_node.id) }}">Back to Node Details</a>
+{% endblock %}

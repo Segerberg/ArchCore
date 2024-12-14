@@ -1,0 +1,28 @@
+<!-- _edit_form.jinja2 -->
+<div id="agent-detail-view">
+<h2>Edit: {{ agent.name }}</h2>
+
+<form hx-post="{{ url_for('data_management.edit_agent_record', agent_id=agent.id) }}">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value="{{ agent.name }}" required><br>
+
+    <label for="date_start">Date Start:</label>
+    <input type="date" name="date_start" id="date_start" value="{{ agent.date_start }}"><br>
+
+    <label for="date_end">Date End:</label>
+    <input type="date" name="date_end" id="date_end" value="{{ agent.date_end }}"><br>
+
+    <label for="type">Agent Type:</label>
+    <select name="type" id="type">
+        {% for type in agent_type_list %}
+            <option value="{{ type }}" {% if agent.type == type %}selected{% endif %}>{{ type }}</option>
+        {% endfor %}
+    </select><br>
+
+    <label for="description">Description:</label>
+    <textarea name="description" id="description">{{ agent.description }}</textarea><br>
+
+    <button type="submit">Save&nbsp;💾</button>
+    <button type="button" hx-get="{{ url_for('data_management.agent_record_detail', id=agent.id, submenu=False) }}" hx-target="#agent-detail-view" hx-swap="outerHTML">Cancel ✖</button>
+</form>
+    </div>

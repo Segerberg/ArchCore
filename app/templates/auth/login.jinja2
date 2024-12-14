@@ -1,49 +1,38 @@
 {% extends "base.jinja2" %}
 {% block content %}
+<div class="flex-container justify-center items-center h-screen bg-gray-100">
+    <form action="" method="post" novalidate class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+        {{ form.hidden_tag() }}
+        <h1 class="text-2xl font-semibold mb-6 text-center">{{ _('Login') }}</h1>
 
-
-<form action="" method="post" novalidate>
-    {{ form.hidden_tag() }}
-        <div>
-            <h1>{{_('Login')}}</h1>
-
-            <!-- Username Input -->
-            <div>
-                <label>{{ form.username.label }}</label>
-                {{ form.username(class_= "mt-1 p-2 w-full border rounded-md") }}
-                {% for error in form.username.errors %}
-                <p>[{{ error }}]</p>
-                {% endfor %}
-            </div>
-
-            <!-- Password Input -->
-            <div>
-                <label>{{ form.password.label }}</label>
-                {{ form.password(class_="mt-1 p-2 w-full border rounded-md") }}
-                {% for error in form.password.errors %}
-                <p>[{{ error }}]</p>
-                {% endfor %}
-            </div>
-
-            <!-- Remember Me Checkbox -->
-            <div>
-                {{ form.remember_me(class_="mr-2") }}
-                <label class="text-sm text-gray-600">{{ form.remember_me.label }}</label>
-            </div>
-
-            <!-- Submit Button -->
-            <div>
-                {{ form.submit(class_="bg-blue-500 text-white px-4 py-2 rounded-md w-full") }}
-            </div>
-
+        <!-- Username Input -->
+        <div class="mb-4">
+            <label class="block text-gray-700">{{ form.username.label }}</label>
+            {{ form.username(class_="mt-1 p-2 w-full border rounded-md") }}
+            {% for error in form.username.errors %}
+            <p class="text-red-600 text-sm">{{ error }}</p>
+            {% endfor %}
         </div>
 
-</form>
+        <!-- Password Input -->
+        <div class="mb-4">
+            <label class="block text-gray-700">{{ form.password.label }}</label>
+            {{ form.password(class_="mt-1 p-2 w-full border rounded-md") }}
+            {% for error in form.password.errors %}
+            <p class="text-red-600 text-sm">{{ error }}</p>
+            {% endfor %}
+        </div>
 
+        <!-- Remember Me Checkbox -->
+        <div class="mb-6">
+            {{ form.remember_me(class_="mr-2") }}
+            <label class="text-sm text-gray-600">{{ form.remember_me.label }}</label>
+        </div>
 
-
-
-
-
-
+        <!-- Submit Button -->
+        <div>
+            {{ form.submit(class_="bg-blue-500 text-white px-4 py-2 rounded-md w-full") }}
+        </div>
+    </form>
+</div>
 {% endblock %}

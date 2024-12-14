@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:pronom="http://pronom.nationalarchives.gov.uk"
@@ -11,15 +10,7 @@
   <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml">
       <head>
-        <title>PRONOM Report</title>
         <style>
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.5;
-          }
-          h1, h2, h3 {
-            color: #333;
-          }
           .section {
             margin-bottom: 20px;
           }
@@ -34,14 +25,12 @@
             margin-left: 20px;
           }
           summary {
-            font-size: 1.2em;
-            font-weight: bold;
             cursor: pointer;
           }
         </style>
       </head>
       <body>
-        <h1>PRONOM Report</h1>
+        <h2>PRONOM Details</h2>
 
         <!-- Apply templates to the report details -->
         <xsl:apply-templates select="//pronom:report_format_detail/pronom:FileFormat"/>
@@ -53,7 +42,7 @@
   <!-- Template to handle FileFormat details -->
   <xsl:template match="pronom:FileFormat">
     <div class="section">
-      <details open="true">
+      <details>
         <summary>Format Details</summary>
         <div>
           <div class="label">Format ID:</div>

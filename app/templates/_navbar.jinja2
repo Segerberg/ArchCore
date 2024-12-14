@@ -3,6 +3,7 @@
     {% if current_user.is_anonymous %}
     {% else %}
     <strong>
+        <a href="{{url_for('main.index')}}">{{_('Dashboard')}}</a>&nbsp;|
     <a href="#">{{_('Transfer')}}</a>&nbsp;|
     <a href="#">{{_('Ingest')}}</a>&nbsp;|
     <a href="#">{{_('Storage')}}</a>&nbsp;|
@@ -10,11 +11,12 @@
     <a href="{{ url_for('preservation_planning.index') }}">{{_('Preservation&nbsp;planning')}}</a>&nbsp;|
     <a href="{{ url_for('data_management.index') }}">{{_('Data&nbsp;Management')}}</a>&nbsp;|
     <a href="{{ url_for('main.administration') }}">{{_('Administration')}}</a>&nbsp;|
-        <a href="#" onclick="toggleMode()">Toggle Mode</a>
 
         <details>
         <summary>{{current_user.username}}</summary>
         <ul>
+            <li>&nbsp;</li>
+            <li><a href="#" onclick="toggleMode()">Mode</a></li>
             <li><a href="{{ url_for('auth.logout') }}">{{_('Logout')}}</a></li>
         </ul>
     </details>

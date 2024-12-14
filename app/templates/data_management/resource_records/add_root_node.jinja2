@@ -1,6 +1,6 @@
 <div id="node-detail-view">
-<form hx-post="/node/{{ parent_node.id }}/add_child" hx-target="#node-detail-view" hx-swap="outerHTML">
-    <h2>Add Child Node</h2>
+<form method="POST" action="{{ url_for('data_management.add_node') }}">
+    <h2>Add Top Level Resource</h2>
 
     <label for="title">Title:</label>
     <input type="text" name="title" id="title" required><br>
@@ -20,8 +20,6 @@
             <option value="{{ lod }}">{{ lod }}</option>
         {% endfor %}
     </select><br>
-
     <button type="submit">Save</button>
-    <button type="button" hx-get="/node/{{ parent_node.id }}/details" hx-target="node-detail-view" hx-swap="outerHTML">Cancel</button>
 </form>
 </div>

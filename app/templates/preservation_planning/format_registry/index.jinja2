@@ -17,7 +17,7 @@
     {% if items %}
     {% for item in items %}
     <tr>
-        <td>{{item.puid}}</a></td>
+        <td><a href="{{url_for('preservation_planning.format_registry_detail', id=item.id)}}"> {{item.puid}}</a></td>
         <td>{{item.format_name}}</td>
         <td>{{item.format_version}}</td>
         <td>{% if item.preservation %}✔{% else %}𐄂{% endif %}</td>

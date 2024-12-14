@@ -1,4 +1,39 @@
 {% extends "base.jinja2" %}
 {% block content %}
-<h1 class="text-2xl mb-4">{{_('ArchCore: An open-source digital repository')}}</h1>
+<main id="content" class="content">
+<pre>
+   _            _       ___
+  /_\  _ __ ___| |__   / __\___  _ __ ___
+ //_\\| '__/ __| '_ \ / /  / _ \| '__/ _ \
+/  _  \ | | (__| | | / /__| (_) | | |  __/
+\_/ \_/_|  \___|_| |_\____/\___/|_|  \___|
+ </pre>
+<div class="flex-container">
+   <div class="flex-item">
+        <div class="card">
+            <div class="card-header"><h3>{{_('IP')}}</h3></div>
+            <div class="card-content">
+            <p>TODO</p>
+            </div>
+        </div>
+   </div>
+       <div class="flex-item">
+        <div class="card">
+            <div class="card-header"><h3><a href="{{url_for('data_management.agent_records')}}">{{_('Agent Records')}}</a></h3></div>
+            <div class="card-content">
+            <p>{{agent_count}}</p>
+            </div>
+        </div>
+   </div>
+           <div class="flex-item">
+        <div class="card">
+            <div class="card-header"><h3><a href="{{url_for('data_management.resources')}}">{{_('Resource Records')}}</a></h3></div>
+            <div class="card-content">
+            <p>{{resources_count}}</p>
+            </div>
+        </div>
+   </div>
+
+</div>
+</main>
 {% endblock %}

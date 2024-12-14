@@ -1,0 +1,103 @@
+{% extends "base.jinja2" %}
+{% block content %}
+{% include "data_management/_submenu.jinja2" %}
+<p>
+    {% for parent in selected_node.get_all_parent_nodes() %}
+        <a href="{{ url_for('data_management.resource_detail', id=parent.id) }}">
+            {{ parent.title }}
+        </a>
+        {% if not loop.last %} > {% endif %}
+    {% endfor %}
+</p>
+<div class="flex-container">
+
+    <!-- Left column: Tree structure -->
+    <div class="tree-column">
+        <h2>{{node.level_of_description}}</h2>
+        <h2>{{ node.title }}</h2>
+        <ul class="tree">
+    {% for child in node.children %}
+    <li class="{% if child.id == selected_node.id %}selected-node{% endif %}">
+        <details id="child-{{ child.id }}" {% if child.id == selected_node.id %} open {% endif %}>
+            <summary>
+                <a href="{{ url_for('data_management.resource_detail', id=child.id) }}">
+                    {{ child.title }}
+                </a>
+            </summary>
+            <!-- Recursively render children for each child node -->
+            {% if child.children %}
+                <ul class="tree">
+                    {% for grandchild in child.children %}
+                    <li>
+                        <a href="{{ url_for('data_management.resource_detail', id=grandchild.id) }}">
+                            {{ grandchild.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </details>
+    </li>
+    {% endfor %}
+</ul>
+    </div>
+
+    <!-- Center column: Node details -->
+    <div class="node-column">
+<div id="node-detail-view">
+
+    <details open>
+        <summary class="summary-header">
+            <h2>IDENTITY STATEMENT AREA</h2>
+        </summary>
+        <p>Reference code: {{ node.ref_code }}</p>
+        <p>Title: {{ node.title }}</p>
+        <p>Level of description: {{ node.level_of_description }}</p>
+        <p>Start Date: {% if node.date_start %} {{ node.date_start.strftime("%Y-%m-%d") }} {% endif %}</p>
+        <p>End Date: {% if node.date_end %} {{ node.date_end.strftime("%Y-%m-%d") }} {% endif %}</p>
+        <p>Extent and medium: {{ node.extent }}</p>
+    </details>
+    <details open>
+        <summary class="summary-header">
+            <h2>CONTEXT AREA</h2>
+        </summary>
+        <p>Name of creator(s): X</p>
+        <p>Archival history:<br>{{ node.archival_history }}</p>
+    </details>
+    <details>
+        <summary class="summary-header">
+            <h2>NOTES</h2>
+        </summary>
+        <p>Content goes here...</p>
+    </details>
+    <details>
+        <summary class="summary-header">
+            <h2>ACCESS POINTS</h2>
+        </summary>
+        <p>Content goes here...</p>
+    </details>
+    <details open>
+        <summary class="summary-header">
+            <h2>RELATED AGENTS</h2>
+        </summary>
+        {% for agent in node.agents %}
+        <p><a href="{{ url_for('data_management.agent_record_detail', id=agent.id) }}">{{ agent.name }}</a></p>
+        {% endfor %}
+        <a href="{{ url_for('data_management.view_and_remove_associations', id=node.id) }}"><button>Manage Associations</button></a>
+    </details>
+</div>
+    </div>
+
+    <!-- Right column: Action buttons -->
+    <div class="action-column">
+        <h2>Actions</h2>
+        <a href="{{ url_for('data_management.edit_node', id=node.id) }}"><button>Edit</button></a>
+        <button hx-get="/node/{{ node.id }}/add_child" hx-target="#node-detail-view" hx-swap="outerHTML">Add Child</button>
+        <a href="{{ url_for('data_management.delete_node', id=node.id)}}"><button>Delete</button></a>
+
+    <a href="{{ url_for('data_management.move_node', tree_root_id=tree_root.id, source_node_id=node.id) }}">
+    <button class="btn btn-warning">Move Node</button>
+</a>
+</div>
+
+{% endblock %}
